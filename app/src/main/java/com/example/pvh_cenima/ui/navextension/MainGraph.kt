@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.example.pvh_cenima.navigation.Graph
 import com.example.pvh_cenima.navigation.Screen
+import com.example.pvh_cenima.ui.features.auth.presentation.sign_In_Screen
 import com.example.pvh_cenima.ui.features.auth.presentation.signin_signup_screen
 import com.example.pvh_cenima.ui.features.splash_screen.presentation.SplashScreen
 
@@ -25,12 +26,17 @@ fun NavGraphBuilder.splashScreenGraph(navController: NavController) {
 fun NavGraphBuilder.authGraph(navController: NavController) {
     navigation(
         route = Graph.AUTH_GRAPH,
-        startDestination = Screen.SignInSignUpScreen.route
+        startDestination = Screen.SignInScreen.route
     ) {
         composable(
             route = Screen.SignInSignUpScreen.route
         ) {
             signin_signup_screen(navController)
+        }
+        composable(
+            route = Screen.SignInScreen.route
+        ) {
+            sign_In_Screen()
         }
     }
 }

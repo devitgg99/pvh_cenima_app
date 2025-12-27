@@ -1,6 +1,6 @@
 package com.example.pvh_cenima.network
 
-import com.example.pvh_cenima.common.constant.HeaderToken
+import com.example.pvh_cenima.common.constant.UserSession
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
@@ -23,7 +23,7 @@ class AuthInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest = chain.request()
         originalRequest.url.toString()
-        val token = HeaderToken.Token
+        val token = UserSession.getAccessToken()
 
         /**
          * some endpoint that no need token

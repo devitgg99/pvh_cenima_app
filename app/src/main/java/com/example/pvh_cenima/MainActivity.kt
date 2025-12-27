@@ -15,11 +15,9 @@ import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.pvh_cenima.common.constant.UserSession
 import com.example.pvh_cenima.navigation.Screen
 import com.example.pvh_cenima.ui.graph.MainNavGraph
 import com.example.pvh_cenima.ui.theme.Pvh_cenimaTheme
@@ -32,19 +30,19 @@ class MainActivity : ComponentActivity() {
     override fun attachBaseContext(newBase: Context) {
         super.attachBaseContext(LocalHelper.wrapContext(newBase))
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             val navController = rememberNavController()
-            rememberNavController()
-            UserSession.initialize(LocalContext.current)
             val navBackStackEntry by navController.currentBackStackEntryAsState()
             navBackStackEntry?.destination?.parent?.route
             val currentRoute = navBackStackEntry?.destination?.route
             val hideTopBar = listOf(
                 Screen.SignInSignUpScreen.route,
-                Screen.SplashScreen.route
+                Screen.SplashScreen.route,
+                Screen.SignInScreen.route
             )
             Pvh_cenimaTheme {
                 Scaffold(

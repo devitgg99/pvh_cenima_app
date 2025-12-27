@@ -30,13 +30,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import com.example.pvh_cenima.common.constant.UserSession
 import com.example.pvh_cenima.ui.theme.bottomSheetColor
-import com.example.pvh_cenima.ui.utility.LocalHelper
 
 
-enum class Language{
-    ENGLISH,KHMER
+enum class Language {
+    ENGLISH, KHMER
 }
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LanguageBottomSheet(onDismissRequest: () -> Unit) {
@@ -48,9 +49,9 @@ fun LanguageBottomSheet(onDismissRequest: () -> Unit) {
     val maxSheetHeight = screenHeight / 2
     val context = LocalContext.current
     val activity = context as? Activity
-    val savedLang = LocalHelper.getSavedLanguage(context)
-    var isSelected by remember { 
-        mutableStateOf(if (savedLang == "km") Language.KHMER else Language.ENGLISH) 
+    val savedLang = UserSession.getSavedLanguage()
+    var isSelected by remember {
+        mutableStateOf(if (savedLang == "km") Language.KHMER else Language.ENGLISH)
     }
     ModalBottomSheet(
         onDismissRequest = {
@@ -143,7 +144,7 @@ fun LanguageBottomSheet(onDismissRequest: () -> Unit) {
             Button(
                 onClick = {
                     val langCode = if (isSelected == Language.KHMER) "km" else "en"
-                    LocalHelper.saveLanguage(context, langCode)
+                    UserSession.saveLanguage(langCode)
                     activity?.recreate()
                 },
                 modifier = Modifier.fillMaxWidth()

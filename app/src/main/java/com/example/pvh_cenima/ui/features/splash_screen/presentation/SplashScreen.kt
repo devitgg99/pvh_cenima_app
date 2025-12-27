@@ -28,7 +28,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.pvh_cenima.R
-import com.example.pvh_cenima.navigation.Screen
+import com.example.pvh_cenima.navigation.Graph
 import com.example.pvh_cenima.ui.theme.primary
 import kotlinx.coroutines.delay
 
@@ -80,7 +80,7 @@ fun SplashScreen(navController: NavController) {
 
         // Wait and navigate
         delay(1000)
-        navController.navigate(Screen.SignInSignUpScreen.route)
+        navController.navigate(Graph.AUTH_GRAPH)
     }
     Box(
         modifier = Modifier
