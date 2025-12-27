@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">PVHCenima</string>
+    <string name="app_name" translatable="false">PVHCenima</string>
+    <string name="sign_up">Sign Up</string>
 </resources>

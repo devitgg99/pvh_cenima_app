@@ -1,5 +1,6 @@
 package com.example.pvh_cenima.ui.components
 
+import android.app.Activity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -27,9 +28,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.example.pvh_cenima.ui.theme.bottomSheetColor
+import com.example.pvh_cenima.ui.utility.LocalHelper
 
+
+enum class Language{
+    ENGLISH,KHMER
+}
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LanguageBottomSheet(onDismissRequest: () -> Unit) {
@@ -39,7 +46,12 @@ fun LanguageBottomSheet(onDismissRequest: () -> Unit) {
     val configuration = LocalConfiguration.current
     val screenHeight = configuration.screenHeightDp.dp
     val maxSheetHeight = screenHeight / 2
-    var isSelected by remember { mutableStateOf(false) }
+    val context = LocalContext.current
+    val activity = context as? Activity
+    val savedLang = LocalHelper.getSavedLanguage(context)
+    var isSelected by remember { 
+        mutableStateOf(if (savedLang == "km") Language.KHMER else Language.ENGLISH) 
+    }
     ModalBottomSheet(
         onDismissRequest = {
             onDismissRequest()
@@ -76,7 +88,7 @@ fun LanguageBottomSheet(onDismissRequest: () -> Unit) {
                         .fillMaxWidth()
                         .clickable(
                             onClick = {
-                                isSelected = !isSelected
+                                isSelected = Language.ENGLISH
                             },
                             indication = null,       // ← This removes the ripple
                             interactionSource = remember { MutableInteractionSource() }
@@ -89,9 +101,9 @@ fun LanguageBottomSheet(onDismissRequest: () -> Unit) {
                         style = MaterialTheme.typography.titleMedium
                     )
                     RadioButton(
-                        selected = isSelected,
+                        selected = isSelected == Language.ENGLISH,
                         onClick = {
-                            isSelected = !isSelected
+                            isSelected = Language.ENGLISH
                         },
                     )
                 }
@@ -108,7 +120,7 @@ fun LanguageBottomSheet(onDismissRequest: () -> Unit) {
                         .fillMaxWidth()
                         .clickable(
                             onClick = {
-                                isSelected = !isSelected
+                                isSelected = Language.KHMER
                             },
                             indication = null,       // ← This removes the ripple
                             interactionSource = remember { MutableInteractionSource() }
@@ -121,21 +133,23 @@ fun LanguageBottomSheet(onDismissRequest: () -> Unit) {
                         style = MaterialTheme.typography.titleMedium
                     )
                     RadioButton(
-                        selected = isSelected,
+                        selected = isSelected == Language.KHMER,
                         onClick = {
-                            isSelected = !isSelected
+                            isSelected = Language.KHMER
                         },
                     )
                 }
             }
             Button(
                 onClick = {
-
+                    val langCode = if (isSelected == Language.KHMER) "km" else "en"
+                    LocalHelper.saveLanguage(context, langCode)
+                    activity?.recreate()
                 },
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
-                    "Use English",
+                    "Use ${isSelected.name}",
                     style = MaterialTheme.typography.titleSmall,
                     color = Color.White
                 )

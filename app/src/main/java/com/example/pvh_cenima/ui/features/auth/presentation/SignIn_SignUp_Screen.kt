@@ -38,6 +38,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -202,7 +203,7 @@ fun signin_signup_screen(navController: NavController) {
                 )
             ) {
                 Text(
-                    "Sign in",
+                    text = stringResource(R.string.sign_up),
                     style = MaterialTheme.typography.titleSmall,
                     color = secondary
                 )

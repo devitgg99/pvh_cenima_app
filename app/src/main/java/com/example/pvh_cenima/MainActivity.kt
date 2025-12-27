@@ -1,5 +1,6 @@
 package com.example.pvh_cenima
 
+import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -23,10 +24,14 @@ import com.example.pvh_cenima.navigation.Screen
 import com.example.pvh_cenima.ui.graph.MainNavGraph
 import com.example.pvh_cenima.ui.theme.Pvh_cenimaTheme
 import com.example.pvh_cenima.ui.theme.primary
+import com.example.pvh_cenima.ui.utility.LocalHelper
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LocalHelper.wrapContext(newBase))
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
