@@ -7,10 +7,17 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
@@ -19,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.pvh_cenima.R
 import com.example.pvh_cenima.ui.features.home.presentation.component.CarouselCard
+import com.example.pvh_cenima.ui.features.home.presentation.component.MovieCard
 import com.example.pvh_cenima.ui.features.home.presentation.model.BannerCard
 import com.example.pvh_cenima.ui.theme.primary
 import com.example.pvh_cenima.ui.theme.secondary
@@ -64,7 +72,12 @@ fun HomeScreen(navController: NavController) {
             pagerState.scrollToPage(nextPage)
         }
     }
-    Column {
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+    ) {
         HorizontalPager(
             state = pagerState
         ) { currentPage ->
@@ -90,6 +103,52 @@ fun HomeScreen(navController: NavController) {
                         .width(if (isSelected) 35.dp else 7.dp)
                         .height(7.dp)
                 )
+            }
+        }
+        Spacer(modifier = Modifier.height(10.dp))
+        Column(
+            modifier = Modifier.padding(horizontal = 16.dp)
+        ) {
+            Text(
+                "Latest release",
+                style = MaterialTheme.typography.titleMedium
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            LazyRow {
+                items(10) {
+                    MovieCard()
+                    Spacer(modifier = Modifier.width(10.dp))
+                }
+            }
+        }
+        Column(
+            modifier = Modifier.padding(horizontal = 16.dp)
+        ) {
+            Text(
+                "Latest release",
+                style = MaterialTheme.typography.titleMedium
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            LazyRow {
+                items(10) {
+                    MovieCard()
+                    Spacer(modifier = Modifier.width(10.dp))
+                }
+            }
+        }
+        Column(
+            modifier = Modifier.padding(horizontal = 16.dp)
+        ) {
+            Text(
+                "Latest release",
+                style = MaterialTheme.typography.titleMedium
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            LazyRow {
+                items(10) {
+                    MovieCard()
+                    Spacer(modifier = Modifier.width(10.dp))
+                }
             }
         }
     }

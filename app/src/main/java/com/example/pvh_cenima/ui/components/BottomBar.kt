@@ -28,6 +28,7 @@ import com.example.pvh_cenima.R
 import com.example.pvh_cenima.navigation.Screen
 import com.example.pvh_cenima.ui.theme.bottomSheetColor
 import com.example.pvh_cenima.ui.theme.primary
+import com.example.pvh_cenima.ui.utility.rememberHapticFeedback
 
 data class BottomNavItem(
     val route: String,
@@ -41,11 +42,11 @@ fun BottomBar(navController: NavHostController) {
         BottomNavItem(Screen.HomeScreen.route, R.drawable.homeic, "Home"),
         BottomNavItem(Screen.ExploreScreen.route, R.drawable.exploreic, "Explore"),
         BottomNavItem(Screen.ListScreen.route, R.drawable.listic, "List"),
-        BottomNavItem(Screen.ProfileScreen.route, R.drawable.profile, "Profile")
+        BottomNavItem(Screen.ProfileScreen.route, R.drawable.profileic, "Profile")
     )
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
-
+    val hapticFeedback = rememberHapticFeedback()
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -68,6 +69,7 @@ fun BottomBar(navController: NavHostController) {
                         indication = null, // no ripple
                         interactionSource = remember { MutableInteractionSource() }
                     ) {
+                        hapticFeedback.click()
                         navController.navigate(it.route) {
                             popUpTo(navController.graph.startDestinationId) {
                                 saveState = true

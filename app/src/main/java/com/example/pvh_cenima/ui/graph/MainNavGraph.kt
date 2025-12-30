@@ -11,7 +11,7 @@ import com.example.pvh_cenima.ui.navextension.onboardinggraph
 import com.example.pvh_cenima.ui.navextension.splashScreenGraph
 
 @Composable
-fun MainNavGraph(navController: NavHostController, modifier: Modifier = Modifier) {
+fun MainNavGraph(navController: NavHostController, modifier: Modifier) {
     NavHost(
         navController = navController,
         startDestination = Graph.FEATURE_GRAPH,
