@@ -80,7 +80,7 @@ fun SplashScreen(navController: NavController) {
 
         // Wait and navigate
         delay(1000)
-        navController.navigate(Graph.AUTH_GRAPH)
+        navController.navigate(Graph.ON_BOARDING_GRAPH)
     }
     Box(
         modifier = Modifier

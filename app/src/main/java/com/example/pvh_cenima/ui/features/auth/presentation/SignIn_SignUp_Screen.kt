@@ -43,6 +43,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.pvh_cenima.R
+import com.example.pvh_cenima.navigation.Screen
 import com.example.pvh_cenima.ui.components.LanguageBottomSheet
 import com.example.pvh_cenima.ui.theme.dark_primary
 import com.example.pvh_cenima.ui.theme.primary
@@ -169,6 +170,9 @@ fun signin_signup_screen(navController: NavController) {
             Button(
                 onClick = {
                     haptic.click()
+                    navController.navigate(
+                        Screen.SignInScreen.route
+                    )
                 },
                 modifier = Modifier
                     .bounceClick(0.9f)
@@ -188,6 +192,9 @@ fun signin_signup_screen(navController: NavController) {
             Button(
                 onClick = {
                     haptic.click()
+                    navController.navigate(
+                        Screen.SignUpScreen.route
+                    )
                 },
                 modifier = Modifier
                     .fillMaxWidth()

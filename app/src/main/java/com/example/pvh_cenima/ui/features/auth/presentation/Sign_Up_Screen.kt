@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
@@ -42,10 +43,13 @@ import com.example.pvh_cenima.ui.theme.primary
 import com.example.pvh_cenima.ui.theme.secondary
 
 @Composable
-fun sign_In_Screen(navController: NavController) {
+fun Sign_Un_Screen(navController: NavController) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    var firstName by remember { mutableStateOf("") }
+    var lastName by remember { mutableStateOf("") }
     var isVisible by remember { mutableStateOf(false) }
+
     Scaffold(
         topBar = {
             Row(
@@ -71,20 +75,20 @@ fun sign_In_Screen(navController: NavController) {
                 horizontalArrangement = Arrangement.Center
             ) {
                 Text(
-                    "Don't have account yet? ",
+                    "Already have account? ",
                     color = secondary.copy(0.8f),
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.bodyMedium
                 )
                 Text(
-                    "Sign Up",
+                    "Sign In",
                     color = primary,
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.SemiBold,
                     modifier = Modifier.clickable(
                         onClick = {
-                            navController.navigate(Screen.SignUpScreen.route)
+                            navController.navigate(Screen.SignInScreen.route)
                         }
                     )
                 )
@@ -97,7 +101,7 @@ fun sign_In_Screen(navController: NavController) {
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                "Sign In",
+                "Sign Up",
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp),
@@ -106,6 +110,40 @@ fun sign_In_Screen(navController: NavController) {
                 style = MaterialTheme.typography.displaySmall,
                 fontWeight = FontWeight.SemiBold
             )
+            Spacer(modifier = Modifier.height(15.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)
+            ) {
+                OutlinedTextField(
+                    value = firstName,
+                    onValueChange = {
+                        firstName = it
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth(0.47f),
+                    placeholder = {
+                        Text(
+                            "First Name"
+                        )
+                    },
+                    shape = RoundedCornerShape(16.dp)
+                )
+                Spacer(modifier = Modifier.width(15.dp))
+                OutlinedTextField(
+                    value = lastName,
+                    onValueChange = {
+                        lastName = it
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    placeholder = {
+                        Text(
+                            "Last Name"
+                        )
+                    },
+                    shape = RoundedCornerShape(16.dp)
+                )
+            }
             Spacer(modifier = Modifier.height(15.dp))
             OutlinedTextField(
                 value = email,
@@ -151,17 +189,6 @@ fun sign_In_Screen(navController: NavController) {
                     }
                 }
             )
-            Spacer(modifier = Modifier.height(5.dp))
-            Text(
-                "Forgot Password?",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
-                color = primary,
-                textAlign = TextAlign.End,
-                style = MaterialTheme.typography.bodyMedium,
-                fontWeight = FontWeight.SemiBold
-            )
             Spacer(modifier = Modifier.height(25.dp))
             Button(
                 onClick = {},
@@ -170,7 +197,7 @@ fun sign_In_Screen(navController: NavController) {
                 shape = RoundedCornerShape(12.dp)
             ) {
                 Text(
-                    "Sign In",
+                    "Sign Up",
                     color = secondary,
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.titleSmall,
